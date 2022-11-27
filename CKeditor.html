@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>CKEditor 5 – Classic editor</title>
+    <script src="https://cdn.ckeditor.com/ckeditor5/35.3.2/classic/ckeditor.js"></script>
+    <script></script>
+  </head>
+  <body>
+    <h1>Classic editor</h1>
+    <button onclick="genHtml()">Gen HTML</button>
+    <button onclick="copyHtml()">Copy HTML to clipboard</button>
+    <p id="result"></p>
+    <div id="editor">
+      <p>This is some sample content.</p>
+    </div>
+    <script>
+      var myEditor;
+      ClassicEditor.create(document.querySelector("#editor"))
+        .then((editor) => {
+          console.log("Editor was initialized", editor);
+          myEditor = editor;
+        })
+        .catch((err) => {
+          console.error(err.stack);
+        });
+      function genHtml() {
+        var htmldata = myEditor.getData();
+        document.getElementById("result").innerText = htmldata;
+      }
+
+      function copyHtml() {
+        var htmldata = myEditor.getData();
+        navigator.clipboard.writeText(htmldata);
+        alert('copied');
+      }
+    </script>
+  </body>
+</html>
